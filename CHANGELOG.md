@@ -6,7 +6,7 @@ description: |-
 ---
 
 # VKCS Provider's changelog
-#### v0.18.1 (unreleased)
+#### v0.18.0-umschool
 - Fix: protocol of vkcs_networking_secgroup_rule specified as a number causing recreation of the rule on Sprut SDN.
 - Fix: creating or updating vkcs_kubernetes_node_group_v2 with auto_scale_min_size equal to zero failing with "Missing input for argument [Size]".
 
