@@ -28,6 +28,14 @@ provider_installation {
 ```
 
 Configurations keep `source = "vk-cs/vkcs"`; `terraform init -upgrade` picks up new versions.
+`terraform providers lock` ignores the CLI configuration, so pass the mirror explicitly when
+recording checksums for other platforms:
+
+```sh
+terraform providers lock -net-mirror=https://purisev.github.io/terraform-provider-vkcs/ \
+  -platform=linux_amd64 -platform=darwin_arm64 -platform=darwin_amd64 -platform=windows_amd64
+```
+
 The mirror is rebuilt by the `Publish provider network mirror` workflow after every release
 and can be rebuilt manually from the Actions tab.
 
