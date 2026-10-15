@@ -9,6 +9,28 @@ Requirements
 -	[Terraform](https://www.terraform.io/downloads.html) 1.1.5 and later
 -	[Go](https://golang.org/doc/install) 1.25 (to build the provider plugin)
 
+Installing From This Repository
+-------------------------------
+Releases of this repository are served through a Terraform provider network mirror at
+[https://purisev.github.io/terraform-provider-vkcs/](https://purisev.github.io/terraform-provider-vkcs/).
+Point Terraform at it in `~/.terraformrc` (Linux, macOS) or `%APPDATA%\terraform.rc` (Windows):
+
+```hcl
+provider_installation {
+  network_mirror {
+    url     = "https://purisev.github.io/terraform-provider-vkcs/"
+    include = ["vk-cs/vkcs", "purisev/vkcs"]
+  }
+  direct {
+    exclude = ["vk-cs/vkcs", "purisev/vkcs"]
+  }
+}
+```
+
+Configurations keep `source = "vk-cs/vkcs"`; `terraform init -upgrade` picks up new versions.
+The mirror is rebuilt by the `Publish provider network mirror` workflow after every release
+and can be rebuilt manually from the Actions tab.
+
 Using The Provider
 ------------------
 To use the provider, prepare configuration files based on examples from [here](https://github.com/vk-cs/terraform-provider-vkcs/tree/master/examples)

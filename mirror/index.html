@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VKCS provider mirror</title>
+<style>
+  body { font: 16px/1.5 system-ui, sans-serif; max-width: 48rem; margin: 2rem auto; padding: 0 1rem; color: #222; }
+  pre { background: #f4f4f4; padding: 1rem; overflow-x: auto; }
+  code { font-family: ui-monospace, monospace; }
+</style>
+</head>
+<body>
+<h1>Terraform network mirror for the VKCS provider</h1>
+<p>This site serves provider metadata by the
+<a href="https://developer.hashicorp.com/terraform/internals/provider-network-mirror-protocol">Terraform provider network mirror protocol</a>.
+Archives are downloaded from the releases of
+<a href="https://github.com/purisev/terraform-provider-vkcs">purisev/terraform-provider-vkcs</a>.</p>
+
+<h2>Setup</h2>
+<p>Add to <code>~/.terraformrc</code> (Linux, macOS) or <code>%APPDATA%\terraform.rc</code> (Windows):</p>
+<pre><code>provider_installation {
+  network_mirror {
+    url     = "https://purisev.github.io/terraform-provider-vkcs/"
+    include = ["vk-cs/vkcs", "purisev/vkcs"]
+  }
+  direct {
+    exclude = ["vk-cs/vkcs", "purisev/vkcs"]
+  }
+}
+</code></pre>
+<p>Then reference the provider as usual:</p>
+<pre><code>terraform {
+  required_providers {
+    vkcs = {
+      source  = "vk-cs/vkcs"
+      version = "~&gt; 0.18.1"
+    }
+  }
+}
+</code></pre>
+<p>Run <code>terraform init -upgrade</code> to pick up a new version.</p>
+
+<h2>Available versions</h2>
+<ul>
+  <li><a href="registry.terraform.io/vk-cs/vkcs/index.json">registry.terraform.io/vk-cs/vkcs</a></li>
+  <li><a href="registry.terraform.io/purisev/vkcs/index.json">registry.terraform.io/purisev/vkcs</a></li>
+</ul>
+</body>
+</html>
